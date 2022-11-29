@@ -3,18 +3,47 @@
 import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Button, Paper, Grid, Switch, TextField } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export default function BasicTextFields() {
-    const [darkMode, setDarkMode] = useState(false);
+    const [lightMode, setLightMode] = useState(false);
 
-    const theme = createTheme({
+    const darkTheme = createTheme({
         palette: {
-            mode: darkMode ? "dark" : "light",
+            mode: "dark",
+            background: {
+                default: "#ffa600",
+                paper: "#ffa600",
+            },
+            primary: {
+                main: "#000000",
+            },
+            secondary: {
+                main: "#fefefe"
+            },
         },
     });
 
+    const lightTheme = createTheme({
+        palette: {
+            mode: "light",
+            background: {
+                default: "rgb(255, 255, 255)",
+                paper: "rgb(255, 255, 255)",
+            },
+            primary: {
+                main: "rgb(255, 166, 0)",
+            },
+            secondary: {
+                main: "rgb(225, 0, 255)"
+            },
+        },
+    });
+
+
     return (
-        <ThemeProvider theme={theme}>
+
+        <ThemeProvider theme={lightMode ? lightTheme : darkTheme}>
             <Paper style={{ height: "100vh" }} sx={{ borderRadius: '0' }}>
 
                 <Grid
@@ -22,7 +51,7 @@ export default function BasicTextFields() {
                     direction="column"
                     alignItems="center"
                 >
-                    < Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+                    < Switch checked={lightMode} onChange={() => setLightMode(!lightMode)} />
                     <TextField
                         label="Email"
                         color="primary"
