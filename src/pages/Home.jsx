@@ -1,29 +1,25 @@
 // IMPLEMENTAÇÃO BÁSICA DE TEMAS USANDO O MATERIAL UI NO REACT
-
 import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Button, Paper, Grid, Switch, TextField } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
+import { Box, CssBaseline, Grid, Switch, TextField, Button } from '@mui/material'
 
 export default function BasicTextFields() {
     const [lightMode, setLightMode] = useState(false);
-
     const darkTheme = createTheme({
         palette: {
             mode: "dark",
             background: {
-                default: "#ffa600",
-                paper: "#ffa600",
+                default: "rgba(30, 27, 32, 1)",
+                paper: "rgba(30, 27, 32, 1)",
             },
             primary: {
-                main: "#000000",
+                main: "rgba(243, 68, 35, 1)",
             },
             secondary: {
-                main: "#fefefe"
+                main: "rgba(235, 121, 252, 1)"
             },
         },
     });
-
     const lightTheme = createTheme({
         palette: {
             mode: "light",
@@ -32,42 +28,28 @@ export default function BasicTextFields() {
                 paper: "rgb(255, 255, 255)",
             },
             primary: {
-                main: "rgb(255, 166, 0)",
+                main: "rgba(243, 68, 35, 1)",
             },
             secondary: {
-                main: "rgb(225, 0, 255)"
+                main: "rgba(235, 121, 252, 1)"
             },
         },
     });
 
-
     return (
-
         <ThemeProvider theme={lightMode ? lightTheme : darkTheme}>
-            <Paper style={{ height: "100vh" }} sx={{ borderRadius: '0' }}>
-
-                <Grid
-                    container
-                    direction="column"
-                    alignItems="center"
-                >
-                    < Switch checked={lightMode} onChange={() => setLightMode(!lightMode)} />
-                    <TextField
-                        label="Email"
-                        color="primary"
-                    />
-                    <TextField
-                        label="Senha"
-                        color="secondary"
-                    />
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                    >Login</Button>
-
-                </Grid>
-
-            </Paper >
-        </ThemeProvider >
+            <Box sx={{ display: 'flex' }}>
+                <CssBaseline />
+                <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 15 }}>
+                    <Grid container direction="column" alignItems="center">
+                        <Box component="img" sx={{ height: 60, width: 260 }} alt="The house from the offer." src="src/assets/logo.png" />
+                        < Switch checked={lightMode} onChange={() => setLightMode(!lightMode)} />
+                        <TextField label="Email" color="primary" />
+                        <TextField label="Senha" color="secondary" />
+                        <Button variant="contained" color="secondary">Login</Button>
+                    </Grid>
+                </Box>
+            </Box>
+        </ThemeProvider>
     );
 }
